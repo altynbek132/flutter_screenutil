@@ -51,14 +51,12 @@ class RSizedBox extends SizedBox {
   final bool _square;
 
   BoxConstraints get _additionalConstraints {
-    final boxConstraints =
-        BoxConstraints.tightFor(width: width, height: height);
+    final boxConstraints = BoxConstraints.tightFor(width: width, height: height);
     return _square ? boxConstraints.r : boxConstraints.hw;
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderConstrainedBox renderObject) {
+  void updateRenderObject(BuildContext context, RenderConstrainedBox renderObject) {
     renderObject.additionalConstraints = _additionalConstraints;
   }
 }

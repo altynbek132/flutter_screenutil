@@ -19,7 +19,6 @@ class ScreenUtil {
   static bool Function() _enableScaleWH = () => true;
   static bool Function() _enableScaleText = () => true;
 
-
   /// UI设计中手机尺寸 , dp
   /// Size of the phone in UI Design , dp
   late Size _uiSize;
@@ -126,17 +125,14 @@ class ScreenUtil {
       else
         designSize = _instance._uiSize;
     } catch (_) {
-      throw Exception(
-          'You must either use ScreenUtil.init or ScreenUtilInit first');
+      throw Exception('You must either use ScreenUtil.init or ScreenUtilInit first');
     }
 
     final MediaQueryData? deviceData = data.nonEmptySizeOrNull();
     final Size deviceSize = deviceData?.size ?? designSize;
 
     final orientation = deviceData?.orientation ??
-        (deviceSize.width > deviceSize.height
-            ? Orientation.landscape
-            : Orientation.portrait);
+        (deviceSize.width > deviceSize.height ? Orientation.landscape : Orientation.portrait);
 
     _instance
       ..fontSizeResolver = fontSizeResolver ?? _instance.fontSizeResolver
@@ -216,11 +212,9 @@ class ScreenUtil {
 
   /// The ratio of actual height to UI design
   double get scaleHeight =>
-      !_enableScaleWH() ? 1 : (_splitScreenMode ? max(screenHeight, 700) : screenHeight) /
-      _uiSize.height;
+      !_enableScaleWH() ? 1 : (_splitScreenMode ? max(screenHeight, 700) : screenHeight) / _uiSize.height;
 
-  double get scaleText =>
-      !_enableScaleText() ? 1 : (_minTextAdapt ? min(scaleWidth, scaleHeight) : scaleWidth);
+  double get scaleText => !_enableScaleText() ? 1 : (_minTextAdapt ? min(scaleWidth, scaleHeight) : scaleWidth);
 
   /// 根据UI设计的设备宽度适配
   /// 高度也可以根据这个来做适配可以保证不变形,比如你想要一个正方形的时候.
@@ -253,8 +247,7 @@ class ScreenUtil {
   ///- [fontSize] UI设计上字体的大小,单位dp.
   ///Font size adaptation method
   ///- [fontSize] The size of the font on the UI design, in dp.
-  double setSp(num fontSize) =>
-      fontSizeResolver?.call(fontSize, _instance) ?? fontSize * scaleText;
+  double setSp(num fontSize) => fontSizeResolver?.call(fontSize, _instance) ?? fontSize * scaleText;
 
   DeviceType deviceType(BuildContext context) {
     var deviceType = DeviceType.web;
@@ -265,11 +258,9 @@ class ScreenUtil {
     if (kIsWeb) {
       deviceType = DeviceType.web;
     } else {
-      bool isMobile = defaultTargetPlatform == TargetPlatform.iOS ||
-          defaultTargetPlatform == TargetPlatform.android;
-      bool isTablet =
-          (orientation == Orientation.portrait && screenWidth >= 600) ||
-              (orientation == Orientation.landscape && screenHeight >= 600);
+      bool isMobile = defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android;
+      bool isTablet = (orientation == Orientation.portrait && screenWidth >= 600) ||
+          (orientation == Orientation.landscape && screenHeight >= 600);
 
       if (isMobile) {
         deviceType = isTablet ? DeviceType.tablet : DeviceType.mobile;
@@ -296,31 +287,23 @@ class ScreenUtil {
     return deviceType;
   }
 
-  SizedBox setVerticalSpacing(num height) =>
-      SizedBox(height: setHeight(height));
+  SizedBox setVerticalSpacing(num height) => SizedBox(height: setHeight(height));
 
-  SizedBox setVerticalSpacingFromWidth(num height) =>
-      SizedBox(height: setWidth(height));
+  SizedBox setVerticalSpacingFromWidth(num height) => SizedBox(height: setWidth(height));
 
   SizedBox setHorizontalSpacing(num width) => SizedBox(width: setWidth(width));
 
-  SizedBox setHorizontalSpacingRadius(num width) =>
-      SizedBox(width: radius(width));
+  SizedBox setHorizontalSpacingRadius(num width) => SizedBox(width: radius(width));
 
-  SizedBox setVerticalSpacingRadius(num height) =>
-      SizedBox(height: radius(height));
+  SizedBox setVerticalSpacingRadius(num height) => SizedBox(height: radius(height));
 
-  SizedBox setHorizontalSpacingDiameter(num width) =>
-      SizedBox(width: diameter(width));
+  SizedBox setHorizontalSpacingDiameter(num width) => SizedBox(width: diameter(width));
 
-  SizedBox setVerticalSpacingDiameter(num height) =>
-      SizedBox(height: diameter(height));
+  SizedBox setVerticalSpacingDiameter(num height) => SizedBox(height: diameter(height));
 
-  SizedBox setHorizontalSpacingDiagonal(num width) =>
-      SizedBox(width: diagonal(width));
+  SizedBox setHorizontalSpacingDiagonal(num width) => SizedBox(width: diagonal(width));
 
-  SizedBox setVerticalSpacingDiagonal(num height) =>
-      SizedBox(height: diagonal(height));
+  SizedBox setVerticalSpacingDiagonal(num height) => SizedBox(height: diagonal(height));
 }
 
 extension on MediaQueryData? {
