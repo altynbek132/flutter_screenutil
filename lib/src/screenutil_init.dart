@@ -135,9 +135,7 @@ class _ScreenUtilInitState extends State<ScreenUtilInit> with WidgetsBindingObse
   }
 
   MediaQueryData? _newData() {
-    final view = View.maybeOf(context);
-    if (view != null) return MediaQueryData.fromView(view);
-    return null;
+    return MediaQuery.maybeOf(context);
   }
 
   Future<void> _validateSize() async {

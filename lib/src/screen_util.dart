@@ -155,9 +155,8 @@ class ScreenUtil {
     bool minTextAdapt = false,
     FontSizeResolver? fontSizeResolver,
   }) {
-    final view = View.maybeOf(context);
     return configure(
-      data: view != null ? MediaQueryData.fromView(view) : null,
+      data: MediaQuery.maybeOf(context),
       designSize: designSize,
       splitScreenMode: splitScreenMode,
       minTextAdapt: minTextAdapt,
