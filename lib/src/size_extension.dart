@@ -6,67 +6,67 @@ import 'screen_util.dart';
 
 extension SizeExtension on num {
   ///[ScreenUtil.setWidth]
-  double get w => ScreenUtil().setWidth(this, index: 0);
+  double wIndexed(int index) => ScreenUtil().setWidth(this, index: index);
 
   ///[ScreenUtil.setHeight]
-  double get h => ScreenUtil().setHeight(this, index: 0);
+  double hIndexed(int index) => ScreenUtil().setHeight(this, index: index);
 
   ///[ScreenUtil.radius]
-  double get r => ScreenUtil().radius(this, index: 0);
+  double rIndexed(int index) => ScreenUtil().radius(this, index: index);
 
   ///[ScreenUtil.diagonal]
-  double get dg => ScreenUtil().diagonal(this, index: 0);
+  double dgIndexed(int index) => ScreenUtil().diagonal(this, index: index);
 
   ///[ScreenUtil.diameter]
-  double get dm => ScreenUtil().diameter(this, index: 0);
+  double dmIndexed(int index) => ScreenUtil().diameter(this, index: index);
 
   ///[ScreenUtil.setSp]
-  double get sp => ScreenUtil().setSp(this, index: 0);
+  double spIndexed(int index) => ScreenUtil().setSp(this, index: index);
 
   ///smart size :  it check your value - if it is bigger than your value it will set your value
   ///for example, you have set 16.sm() , if for your screen 16.sp() is bigger than 16 , then it will set 16 not 16.sp()
   ///I think that it is good for save size balance on big sizes of screen
-  double get spMin => min(toDouble(), sp);
+  double spMinIndexed(int index) => min(toDouble(), spIndexed(index));
 
   @Deprecated('use spMin instead')
-  double get sm => min(toDouble(), sp);
+  double smIndexed(int index) => min(toDouble(), spIndexed(index));
 
-  double get spMax => max(toDouble(), sp);
+  double spMaxIndexed(int index) => max(toDouble(), spIndexed(index));
 
   ///屏幕宽度的倍数
   ///Multiple of screen width
-  double get sw => ScreenUtil().screenWidth(0) * this;
+  double swIndexed(int index) => ScreenUtil().screenWidth(index) * this;
 
   ///屏幕高度的倍数
   ///Multiple of screen height
-  double get sh => ScreenUtil().screenHeight(0) * this;
+  double shIndexed(int index) => ScreenUtil().screenHeight(index) * this;
 
   ///[ScreenUtil.setHeight]
-  SizedBox get verticalSpace => ScreenUtil().setVerticalSpacing(this, index: 0);
+  SizedBox verticalSpaceIndexed(int index) => ScreenUtil().setVerticalSpacing(this, index: index);
 
   ///[ScreenUtil.setVerticalSpacingFromWidth]
-  SizedBox get verticalSpaceFromWidth => ScreenUtil().setVerticalSpacingFromWidth(this, index: 0);
+  SizedBox verticalSpaceFromWidthIndexed(int index) => ScreenUtil().setVerticalSpacingFromWidth(this, index: index);
 
   ///[ScreenUtil.setWidth]
-  SizedBox get horizontalSpace => ScreenUtil().setHorizontalSpacing(this, index: 0);
+  SizedBox horizontalSpaceIndexed(int index) => ScreenUtil().setHorizontalSpacing(this, index: index);
 
   ///[ScreenUtil.radius]
-  SizedBox get horizontalSpaceRadius => ScreenUtil().setHorizontalSpacingRadius(this, index: 0);
+  SizedBox horizontalSpaceRadiusIndexed(int index) => ScreenUtil().setHorizontalSpacingRadius(this, index: index);
 
   ///[ScreenUtil.radius]
-  SizedBox get verticalSpacingRadius => ScreenUtil().setVerticalSpacingRadius(this, index: 0);
+  SizedBox verticalSpacingRadiusIndexed(int index) => ScreenUtil().setVerticalSpacingRadius(this, index: index);
 
   ///[ScreenUtil.diameter]
-  SizedBox get horizontalSpaceDiameter => ScreenUtil().setHorizontalSpacingDiameter(this, index: 0);
+  SizedBox horizontalSpaceDiameterIndexed(int index) => ScreenUtil().setHorizontalSpacingDiameter(this, index: index);
 
   ///[ScreenUtil.diameter]
-  SizedBox get verticalSpacingDiameter => ScreenUtil().setVerticalSpacingDiameter(this, index: 0);
+  SizedBox verticalSpacingDiameterIndexed(int index) => ScreenUtil().setVerticalSpacingDiameter(this, index: index);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get horizontalSpaceDiagonal => ScreenUtil().setHorizontalSpacingDiagonal(this, index: 0);
+  SizedBox horizontalSpaceDiagonalIndexed(int index) => ScreenUtil().setHorizontalSpacingDiagonal(this, index: index);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get verticalSpacingDiagonal => ScreenUtil().setVerticalSpacingDiagonal(this, index: 0);
+  SizedBox verticalSpacingDiagonalIndexed(int index) => ScreenUtil().setVerticalSpacingDiagonal(this, index: index);
 }
 
 extension EdgeInsetsExtension on EdgeInsets {
