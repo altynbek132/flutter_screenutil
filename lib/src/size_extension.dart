@@ -67,6 +67,134 @@ extension SizeExtension on num {
 
   ///[ScreenUtil.diagonal]
   SizedBox verticalSpacingDiagonalIndexed(int index) => ScreenUtil().setVerticalSpacingDiagonal(this, index: index);
+
+// ================================================================================================================== //
+  ///[ScreenUtil.setWidth]
+  double get w => wIndexed(0);
+
+  ///[ScreenUtil.setHeight]
+  double get h => hIndexed(0);
+
+  ///[ScreenUtil.radius]
+  double get r => rIndexed(0);
+
+  ///[ScreenUtil.diagonal]
+  double get dg => dgIndexed(0);
+
+  ///[ScreenUtil.diameter]
+  double get dm => dmIndexed(0);
+
+  ///[ScreenUtil.setSp]
+  double get sp => spIndexed(0);
+
+  ///smart size :  it check your value - if it is bigger than your value it will set your value
+  ///for example, you have set 16.sm() , if for your screen 16.sp() is bigger than 16 , then it will set 16 not 16.sp()
+  ///I think that it is good for save size balance on big sizes of screen
+  double get spMin => spMinIndexed(0);
+
+  @Deprecated('use spMin instead')
+  double get sm => smIndexed(0);
+
+  double get spMax => spMaxIndexed(0);
+
+  ///屏幕宽度的倍数
+  ///Multiple of screen width
+  double get sw => swIndexed(0);
+
+  ///屏幕高度的倍数
+  ///Multiple of screen height
+  double get sh => shIndexed(0);
+
+  ///[ScreenUtil.setHeight]
+  SizedBox get verticalSpace => verticalSpaceIndexed(0);
+
+  ///[ScreenUtil.setVerticalSpacingFromWidth]
+  SizedBox get verticalSpaceFromWidth => verticalSpaceFromWidthIndexed(0);
+
+  ///[ScreenUtil.setWidth]
+  SizedBox get horizontalSpace => horizontalSpaceIndexed(0);
+
+  ///[ScreenUtil.radius]
+  SizedBox get horizontalSpaceRadius => horizontalSpaceRadiusIndexed(0);
+
+  ///[ScreenUtil.radius]
+  SizedBox get verticalSpacingRadius => verticalSpacingRadiusIndexed(0);
+
+  ///[ScreenUtil.diameter]
+  SizedBox get horizontalSpaceDiameter => horizontalSpaceDiameterIndexed(0);
+
+  ///[ScreenUtil.diameter]
+  SizedBox get verticalSpacingDiameter => verticalSpacingDiameterIndexed(0);
+
+  ///[ScreenUtil.diagonal]
+  SizedBox get horizontalSpaceDiagonal => horizontalSpaceDiagonalIndexed(0);
+
+  ///[ScreenUtil.diagonal]
+  SizedBox get verticalSpacingDiagonal => verticalSpacingDiagonalIndexed(0);
+
+// ================================================================================================================== //
+  ///[ScreenUtil.setWidth]
+  double get w2 => wIndexed(1);
+
+  ///[ScreenUtil.setHeight]
+  double get h2 => hIndexed(1);
+
+  ///[ScreenUtil.radius]
+  double get r2 => rIndexed(1);
+
+  ///[ScreenUtil.diagonal]
+  double get dg2 => dgIndexed(1);
+
+  ///[ScreenUtil.diameter]
+  double get dm2 => dmIndexed(1);
+
+  ///[ScreenUtil.setSp]
+  double get sp2 => spIndexed(1);
+
+  ///smart size :  it check your value - if it is bigger than your value it will set your value
+  ///for example, you have set 16.sm() , if for your screen 16.sp() is bigger than 16 , then it will set 16 not 16.sp()
+  ///I think that it is good for save size balance on big sizes of screen
+  double get spMin2 => spMinIndexed(1);
+
+  @Deprecated('use spMin instead')
+  double get sm2 => smIndexed(1);
+
+  double get spMax2 => spMaxIndexed(1);
+
+  ///屏幕宽度的倍数
+  ///Multiple of screen width
+  double get sw2 => swIndexed(1);
+
+  ///屏幕高度的倍数
+  ///Multiple of screen height
+  double get sh2 => shIndexed(1);
+
+  ///[ScreenUtil.setHeight]
+  SizedBox get verticalSpace2 => verticalSpaceIndexed(1);
+
+  ///[ScreenUtil.setVerticalSpacingFromWidth]
+  SizedBox get verticalSpaceFromWidth2 => verticalSpaceFromWidthIndexed(1);
+
+  ///[ScreenUtil.setWidth]
+  SizedBox get horizontalSpace2 => horizontalSpaceIndexed(1);
+
+  ///[ScreenUtil.radius]
+  SizedBox get horizontalSpaceRadius2 => horizontalSpaceRadiusIndexed(1);
+
+  ///[ScreenUtil.radius]
+  SizedBox get verticalSpacingRadius2 => verticalSpacingRadiusIndexed(1);
+
+  ///[ScreenUtil.diameter]
+  SizedBox get horizontalSpaceDiameter2 => horizontalSpaceDiameterIndexed(1);
+
+  ///[ScreenUtil.diameter]
+  SizedBox get verticalSpacingDiameter2 => verticalSpacingDiameterIndexed(1);
+
+  ///[ScreenUtil.diagonal]
+  SizedBox get horizontalSpaceDiagonal2 => horizontalSpaceDiagonalIndexed(1);
+
+  ///[ScreenUtil.diagonal]
+  SizedBox get verticalSpacingDiagonal2 => verticalSpacingDiagonalIndexed(1);
 }
 
 extension EdgeInsetsExtension on EdgeInsets {
