@@ -6,22 +6,22 @@ import 'screen_util.dart';
 
 extension SizeExtension on num {
   ///[ScreenUtil.setWidth]
-  double get w => ScreenUtil().setWidth(this);
+  double get w => ScreenUtil().setWidth(this, index: 0);
 
   ///[ScreenUtil.setHeight]
-  double get h => ScreenUtil().setHeight(this);
+  double get h => ScreenUtil().setHeight(this, index: 0);
 
   ///[ScreenUtil.radius]
-  double get r => ScreenUtil().radius(this);
+  double get r => ScreenUtil().radius(this, index: 0);
 
   ///[ScreenUtil.diagonal]
-  double get dg => ScreenUtil().diagonal(this);
+  double get dg => ScreenUtil().diagonal(this, index: 0);
 
   ///[ScreenUtil.diameter]
-  double get dm => ScreenUtil().diameter(this);
+  double get dm => ScreenUtil().diameter(this, index: 0);
 
   ///[ScreenUtil.setSp]
-  double get sp => ScreenUtil().setSp(this);
+  double get sp => ScreenUtil().setSp(this, index: 0);
 
   ///smart size :  it check your value - if it is bigger than your value it will set your value
   ///for example, you have set 16.sm() , if for your screen 16.sp() is bigger than 16 , then it will set 16 not 16.sp()
@@ -35,38 +35,38 @@ extension SizeExtension on num {
 
   ///屏幕宽度的倍数
   ///Multiple of screen width
-  double get sw => ScreenUtil().screenWidth * this;
+  double get sw => ScreenUtil().screenWidth(0) * this;
 
   ///屏幕高度的倍数
   ///Multiple of screen height
-  double get sh => ScreenUtil().screenHeight * this;
+  double get sh => ScreenUtil().screenHeight(0) * this;
 
   ///[ScreenUtil.setHeight]
-  SizedBox get verticalSpace => ScreenUtil().setVerticalSpacing(this);
+  SizedBox get verticalSpace => ScreenUtil().setVerticalSpacing(this, index: 0);
 
   ///[ScreenUtil.setVerticalSpacingFromWidth]
-  SizedBox get verticalSpaceFromWidth => ScreenUtil().setVerticalSpacingFromWidth(this);
+  SizedBox get verticalSpaceFromWidth => ScreenUtil().setVerticalSpacingFromWidth(this, index: 0);
 
   ///[ScreenUtil.setWidth]
-  SizedBox get horizontalSpace => ScreenUtil().setHorizontalSpacing(this);
+  SizedBox get horizontalSpace => ScreenUtil().setHorizontalSpacing(this, index: 0);
 
   ///[ScreenUtil.radius]
-  SizedBox get horizontalSpaceRadius => ScreenUtil().setHorizontalSpacingRadius(this);
+  SizedBox get horizontalSpaceRadius => ScreenUtil().setHorizontalSpacingRadius(this, index: 0);
 
   ///[ScreenUtil.radius]
-  SizedBox get verticalSpacingRadius => ScreenUtil().setVerticalSpacingRadius(this);
+  SizedBox get verticalSpacingRadius => ScreenUtil().setVerticalSpacingRadius(this, index: 0);
 
   ///[ScreenUtil.diameter]
-  SizedBox get horizontalSpaceDiameter => ScreenUtil().setHorizontalSpacingDiameter(this);
+  SizedBox get horizontalSpaceDiameter => ScreenUtil().setHorizontalSpacingDiameter(this, index: 0);
 
   ///[ScreenUtil.diameter]
-  SizedBox get verticalSpacingDiameter => ScreenUtil().setVerticalSpacingDiameter(this);
+  SizedBox get verticalSpacingDiameter => ScreenUtil().setVerticalSpacingDiameter(this, index: 0);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get horizontalSpaceDiagonal => ScreenUtil().setHorizontalSpacingDiagonal(this);
+  SizedBox get horizontalSpaceDiagonal => ScreenUtil().setHorizontalSpacingDiagonal(this, index: 0);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get verticalSpacingDiagonal => ScreenUtil().setVerticalSpacingDiagonal(this);
+  SizedBox get verticalSpacingDiagonal => ScreenUtil().setVerticalSpacingDiagonal(this, index: 0);
 }
 
 extension EdgeInsetsExtension on EdgeInsets {

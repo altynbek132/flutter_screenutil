@@ -10,7 +10,7 @@ import 'dart:ui' as ui show FlutterView;
 
 import 'package:flutter/widgets.dart';
 
-typedef FontSizeResolver = double Function(num fontSize, ScreenUtil instance);
+typedef FontSizeResolver = double Function(num fontSize, ScreenUtil instance, {required int index});
 
 class ScreenUtil {
   static const Size defaultSize = Size(360, 690);
@@ -21,7 +21,7 @@ class ScreenUtil {
 
   /// UI设计中手机尺寸 , dp
   /// Size of the phone in UI Design , dp
-  late Size _uiSize;
+  late List<Size> _uiSize;
 
   ///屏幕方向
   late Orientation _orientation;
@@ -109,7 +109,7 @@ class ScreenUtil {
 
   static void configure({
     MediaQueryData? data,
-    Size? designSize,
+    List<Size>? designSizes,
     bool? splitScreenMode,
     bool? minTextAdapt,
     FontSizeResolver? fontSizeResolver,
@@ -120,19 +120,19 @@ class ScreenUtil {
       else
         data = _instance._data;
 
-      if (designSize != null)
-        _instance._uiSize = designSize;
+      if (designSizes != null)
+        _instance._uiSize = designSizes;
       else
-        designSize = _instance._uiSize;
+        designSizes = _instance._uiSize;
     } catch (_) {
       throw Exception('You must either use ScreenUtil.init or ScreenUtilInit first');
     }
 
     final MediaQueryData? deviceData = data.nonEmptySizeOrNull();
-    final Size deviceSize = deviceData?.size ?? designSize;
+    final List<Size> deviceSizes = [deviceData?.size ?? designSizes.first];
 
     final orientation = deviceData?.orientation ??
-        (deviceSize.width > deviceSize.height ? Orientation.landscape : Orientation.portrait);
+        (deviceSizes.first.width > deviceSizes.first.height ? Orientation.landscape : Orientation.portrait);
 
     _instance
       ..fontSizeResolver = fontSizeResolver ?? _instance.fontSizeResolver
@@ -146,14 +146,14 @@ class ScreenUtil {
   /// Initializing the library.
   static void init(
     BuildContext context, {
-    Size designSize = defaultSize,
+    List<Size> designSizes = const [defaultSize],
     bool splitScreenMode = false,
     bool minTextAdapt = false,
     FontSizeResolver? fontSizeResolver,
   }) {
     return configure(
       data: MediaQuery.maybeOf(context),
-      designSize: designSize,
+      designSizes: designSizes,
       splitScreenMode: splitScreenMode,
       minTextAdapt: minTextAdapt,
       fontSizeResolver: fontSizeResolver,
@@ -162,7 +162,7 @@ class ScreenUtil {
 
   static Future<void> ensureScreenSizeAndInit(
     BuildContext context, {
-    Size designSize = defaultSize,
+    List<Size> designSizes = const [defaultSize],
     bool splitScreenMode = false,
     bool minTextAdapt = false,
     FontSizeResolver? fontSizeResolver,
@@ -170,7 +170,7 @@ class ScreenUtil {
     return ScreenUtil.ensureScreenSize().then((_) {
       return init(
         context,
-        designSize: designSize,
+        designSizes: designSizes,
         minTextAdapt: minTextAdapt,
         splitScreenMode: splitScreenMode,
         fontSizeResolver: fontSizeResolver,
@@ -184,7 +184,7 @@ class ScreenUtil {
 
   /// 每个逻辑像素的字体像素数，字体的缩放比例
   /// The number of font pixels for each logical pixel.
-  double get textScaleFactor => _data.textScaleFactor;
+  double textScaleFactor(int index) => _data.textScaleFactor;
 
   /// 设备的像素密度
   /// The size of the media in logical pixels (e.g, the size of the screen).
@@ -192,36 +192,38 @@ class ScreenUtil {
 
   /// 当前设备宽度 dp
   /// The horizontal extent of this size.
-  double get screenWidth => _data.size.width;
+  double screenWidth(int index) => _data.size.width;
 
   ///当前设备高度 dp
   ///The vertical extent of this size. dp
-  double get screenHeight => _data.size.height;
+  double screenHeight(int index) => _data.size.height;
 
   /// 状态栏高度 dp 刘海屏会更高
   /// The offset from the top, in dp
-  double get statusBarHeight => _data.padding.top;
+  double statusBarHeight(int index) => _data.padding.top;
 
   /// 底部安全区距离 dp
   /// The offset from the bottom, in dp
-  double get bottomBarHeight => _data.padding.bottom;
+  double bottomBarHeight(int index) => _data.padding.bottom;
 
   /// 实际尺寸与UI设计的比例
   /// The ratio of actual width to UI design
-  double get scaleWidth => !_enableScaleWH() ? 1 : screenWidth / _uiSize.width;
+  double scaleWidth(int index) => !_enableScaleWH() ? 1 : screenWidth(index) / _uiSize[0].width;
 
   /// The ratio of actual height to UI design
-  double get scaleHeight =>
-      !_enableScaleWH() ? 1 : (_splitScreenMode ? max(screenHeight, 700) : screenHeight) / _uiSize.height;
+  double scaleHeight(int index) => !_enableScaleWH()
+      ? 1
+      : (_splitScreenMode ? max(screenHeight(index), 700) : screenHeight(index)) / _uiSize[0].height;
 
-  double get scaleText => !_enableScaleText() ? 1 : (_minTextAdapt ? min(scaleWidth, scaleHeight) : scaleWidth);
+  double scaleText(int index) =>
+      !_enableScaleText() ? 1 : (_minTextAdapt ? min(scaleWidth(index), scaleHeight(index)) : scaleWidth(index));
 
   /// 根据UI设计的设备宽度适配
   /// 高度也可以根据这个来做适配可以保证不变形,比如你想要一个正方形的时候.
   /// Adapted to the device width of the UI Design.
   /// Height can also be adapted according to this to ensure no deformation ,
   /// if you want a square
-  double setWidth(num width) => width * scaleWidth;
+  double setWidth(num width, {required int index}) => width * scaleWidth(index);
 
   /// 根据UI设计的设备高度适配
   /// 当发现UI设计中的一屏显示的与当前样式效果不符合时,
@@ -231,23 +233,24 @@ class ScreenUtil {
   /// It is recommended to use this method to achieve a high degree of adaptation
   /// when it is found that one screen in the UI design
   /// does not match the current style effect, or if there is a difference in shape.
-  double setHeight(num height) => height * scaleHeight;
+  double setHeight(num height, {required int index}) => height * scaleHeight(index);
 
   ///根据宽度或高度中的较小值进行适配
   ///Adapt according to the smaller of width or height
-  double radius(num r) => r * min(scaleWidth, scaleHeight);
+  double radius(num r, {required int index}) => r * min(scaleWidth(index), scaleHeight(index));
 
   /// Adapt according to the both width and height
-  double diagonal(num d) => d * scaleHeight * scaleWidth;
+  double diagonal(num d, {required int index}) => d * scaleHeight(index) * scaleWidth(index);
 
   /// Adapt according to the maximum value of scale width and scale height
-  double diameter(num d) => d * max(scaleWidth, scaleHeight);
+  double diameter(num d, {required int index}) => d * max(scaleWidth(index), scaleHeight(index));
 
   ///字体大小适配方法
   ///- [fontSize] UI设计上字体的大小,单位dp.
   ///Font size adaptation method
   ///- [fontSize] The size of the font on the UI design, in dp.
-  double setSp(num fontSize) => fontSizeResolver?.call(fontSize, _instance) ?? fontSize * scaleText;
+  double setSp(num fontSize, {required int index}) =>
+      fontSizeResolver?.call(fontSize, _instance, index: index) ?? fontSize * scaleText(index);
 
   DeviceType deviceType(BuildContext context) {
     var deviceType = DeviceType.web;
@@ -287,23 +290,28 @@ class ScreenUtil {
     return deviceType;
   }
 
-  SizedBox setVerticalSpacing(num height) => SizedBox(height: setHeight(height));
+  SizedBox setVerticalSpacing(num height, {required int index}) => SizedBox(height: setHeight(height, index: index));
 
-  SizedBox setVerticalSpacingFromWidth(num height) => SizedBox(height: setWidth(height));
+  SizedBox setVerticalSpacingFromWidth(num height, {required int index}) =>
+      SizedBox(height: setWidth(height, index: index));
 
-  SizedBox setHorizontalSpacing(num width) => SizedBox(width: setWidth(width));
+  SizedBox setHorizontalSpacing(num width, {required int index}) => SizedBox(width: setWidth(width, index: index));
 
-  SizedBox setHorizontalSpacingRadius(num width) => SizedBox(width: radius(width));
+  SizedBox setHorizontalSpacingRadius(num width, {required int index}) => SizedBox(width: radius(width, index: index));
 
-  SizedBox setVerticalSpacingRadius(num height) => SizedBox(height: radius(height));
+  SizedBox setVerticalSpacingRadius(num height, {required int index}) => SizedBox(height: radius(height, index: index));
 
-  SizedBox setHorizontalSpacingDiameter(num width) => SizedBox(width: diameter(width));
+  SizedBox setHorizontalSpacingDiameter(num width, {required int index}) =>
+      SizedBox(width: diameter(width, index: index));
 
-  SizedBox setVerticalSpacingDiameter(num height) => SizedBox(height: diameter(height));
+  SizedBox setVerticalSpacingDiameter(num height, {required int index}) =>
+      SizedBox(height: diameter(height, index: index));
 
-  SizedBox setHorizontalSpacingDiagonal(num width) => SizedBox(width: diagonal(width));
+  SizedBox setHorizontalSpacingDiagonal(num width, {required int index}) =>
+      SizedBox(width: diagonal(width, index: index));
 
-  SizedBox setVerticalSpacingDiagonal(num height) => SizedBox(height: diagonal(height));
+  SizedBox setVerticalSpacingDiagonal(num height, {required int index}) =>
+      SizedBox(height: diagonal(height, index: index));
 }
 
 extension on MediaQueryData? {

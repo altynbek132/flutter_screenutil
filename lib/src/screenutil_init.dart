@@ -41,24 +41,24 @@ abstract class RebuildFactors {
 }
 
 abstract class FontSizeResolvers {
-  static double width(num fontSize, ScreenUtil instance) {
-    return instance.setWidth(fontSize);
+  static double width(num fontSize, ScreenUtil instance, {required int index}) {
+    return instance.setWidth(fontSize, index: index);
   }
 
-  static double height(num fontSize, ScreenUtil instance) {
-    return instance.setHeight(fontSize);
+  static double height(num fontSize, ScreenUtil instance, {required int index}) {
+    return instance.setHeight(fontSize, index: index);
   }
 
-  static double radius(num fontSize, ScreenUtil instance) {
-    return instance.radius(fontSize);
+  static double radius(num fontSize, ScreenUtil instance, {required int index}) {
+    return instance.radius(fontSize, index: index);
   }
 
-  static double diameter(num fontSize, ScreenUtil instance) {
-    return instance.diameter(fontSize);
+  static double diameter(num fontSize, ScreenUtil instance, {required int index}) {
+    return instance.diameter(fontSize, index: index);
   }
 
-  static double diagonal(num fontSize, ScreenUtil instance) {
-    return instance.diagonal(fontSize);
+  static double diagonal(num fontSize, ScreenUtil instance, {required int index}) {
+    return instance.diagonal(fontSize, index: index);
   }
 }
 
@@ -69,7 +69,7 @@ class ScreenUtilInit extends StatefulWidget {
     this.builder,
     this.child,
     this.rebuildFactor = RebuildFactors.size,
-    this.designSize = ScreenUtil.defaultSize,
+    this.designSizes = const [ScreenUtil.defaultSize],
     this.splitScreenMode = false,
     this.minTextAdapt = false,
     this.useInheritedMediaQuery = false,
@@ -93,7 +93,7 @@ class ScreenUtilInit extends StatefulWidget {
   final FontSizeResolver fontSizeResolver;
 
   /// The [Size] of the device in the design draft, in dp
-  final Size designSize;
+  final List<Size> designSizes;
   final Iterable<String>? responsiveWidgets;
   final Iterable<String>? excludeWidgets;
 
@@ -181,7 +181,7 @@ class _ScreenUtilInitState extends State<ScreenUtilInit> with WidgetsBindingObse
     if (!widget.ensureScreenSize) {
       ScreenUtil.configure(
         data: mq,
-        designSize: widget.designSize,
+        designSizes: widget.designSizes,
         splitScreenMode: widget.splitScreenMode,
         minTextAdapt: widget.minTextAdapt,
         fontSizeResolver: widget.fontSizeResolver,
@@ -195,7 +195,7 @@ class _ScreenUtilInitState extends State<ScreenUtilInit> with WidgetsBindingObse
       builder: (c, snapshot) {
         ScreenUtil.configure(
           data: mq,
-          designSize: widget.designSize,
+          designSizes: widget.designSizes,
           splitScreenMode: widget.splitScreenMode,
           minTextAdapt: widget.minTextAdapt,
           fontSizeResolver: widget.fontSizeResolver,

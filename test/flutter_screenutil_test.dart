@@ -17,7 +17,7 @@ void main() {
     test('Test smaller size', () {
       ScreenUtil.configure(
         data: smallerDeviceData,
-        designSize: uiSize,
+        designSizes: const [uiSize],
         minTextAdapt: true,
         splitScreenMode: false,
       );
@@ -31,7 +31,7 @@ void main() {
     test('Test bigger size', () {
       ScreenUtil.configure(
         data: biggerDeviceData,
-        designSize: uiSize,
+        designSizes: const [uiSize],
         minTextAdapt: true,
         splitScreenMode: false,
       );
@@ -46,7 +46,7 @@ void main() {
   group('[Test overflow]', () {
     testWidgets('Test overflow width', (tester) async {
       await tester.pumpWidget(ScreenUtilInit(
-        designSize: uiSize,
+        designSizes: const [uiSize],
         child: MaterialApp(home: WidgetTest(width: () => uiSize.width.w)),
       ));
 
@@ -59,7 +59,7 @@ void main() {
 
     testWidgets('Test overflow height', (tester) async {
       await tester.pumpWidget(ScreenUtilInit(
-        designSize: uiSize,
+        designSizes: const [uiSize],
         child: MaterialApp(home: WidgetTest(height: () => uiSize.height.h)),
       ));
 
@@ -79,7 +79,7 @@ void main() {
     Finder textField() => find.byKey(textFieldKey);
 
     await tester.pumpWidget(ScreenUtilInit(
-      designSize: uiSize,
+      designSizes: const [uiSize],
       rebuildFactor: RebuildFactors.always,
       child: MaterialApp(
         home: Scaffold(

@@ -42,7 +42,7 @@ void main() {
         return MediaQuery(
           data: currentData,
           child: ScreenUtilInit(
-            designSize: designSize,
+            designSizes: const [designSize],
             child: MaterialApp(
               home: Material(
                 child: TextButton(
