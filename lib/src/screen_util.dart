@@ -208,12 +208,12 @@ class ScreenUtil {
 
   /// 实际尺寸与UI设计的比例
   /// The ratio of actual width to UI design
-  double scaleWidth(int index) => !_enableScaleWH() ? 1 : screenWidth(index) / _uiSize[0].width;
+  double scaleWidth(int index) => !_enableScaleWH() ? 1 : screenWidth(index) / _uiSize[index].width;
 
   /// The ratio of actual height to UI design
   double scaleHeight(int index) => !_enableScaleWH()
       ? 1
-      : (_splitScreenMode ? max(screenHeight(index), 700) : screenHeight(index)) / _uiSize[0].height;
+      : (_splitScreenMode ? max(screenHeight(index), 700) : screenHeight(index)) / _uiSize[index].height;
 
   double scaleText(int index) =>
       !_enableScaleText() ? 1 : (_minTextAdapt ? min(scaleWidth(index), scaleHeight(index)) : scaleWidth(index));
