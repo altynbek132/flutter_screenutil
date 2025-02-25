@@ -134,67 +134,67 @@ extension SizeExtension on num {
 
 // ================================================================================================================== //
   ///[ScreenUtil.setWidth]
-  double get w2 => wIndexed(1);
+  double get w1 => wIndexed(1);
 
   ///[ScreenUtil.setHeight]
-  double get h2 => hIndexed(1);
+  double get h1 => hIndexed(1);
 
   ///[ScreenUtil.radius]
-  double get r2 => rIndexed(1);
+  double get r1 => rIndexed(1);
 
   ///[ScreenUtil.diagonal]
-  double get dg2 => dgIndexed(1);
+  double get dg1 => dgIndexed(1);
 
   ///[ScreenUtil.diameter]
-  double get dm2 => dmIndexed(1);
+  double get dm1 => dmIndexed(1);
 
   ///[ScreenUtil.setSp]
-  double get sp2 => spIndexed(1);
+  double get sp1 => spIndexed(1);
 
   ///smart size :  it check your value - if it is bigger than your value it will set your value
   ///for example, you have set 16.sm() , if for your screen 16.sp() is bigger than 16 , then it will set 16 not 16.sp()
   ///I think that it is good for save size balance on big sizes of screen
-  double get spMin2 => spMinIndexed(1);
+  double get spMin1 => spMinIndexed(1);
 
   @Deprecated('use spMin instead')
-  double get sm2 => smIndexed(1);
+  double get sm1 => smIndexed(1);
 
-  double get spMax2 => spMaxIndexed(1);
+  double get spMax1 => spMaxIndexed(1);
 
   ///屏幕宽度的倍数
   ///Multiple of screen width
-  double get sw2 => swIndexed(1);
+  double get sw1 => swIndexed(1);
 
   ///屏幕高度的倍数
   ///Multiple of screen height
-  double get sh2 => shIndexed(1);
+  double get sh1 => shIndexed(1);
 
   ///[ScreenUtil.setHeight]
-  SizedBox get verticalSpace2 => verticalSpaceIndexed(1);
+  SizedBox get verticalSpace1 => verticalSpaceIndexed(1);
 
   ///[ScreenUtil.setVerticalSpacingFromWidth]
-  SizedBox get verticalSpaceFromWidth2 => verticalSpaceFromWidthIndexed(1);
+  SizedBox get verticalSpaceFromWidth1 => verticalSpaceFromWidthIndexed(1);
 
   ///[ScreenUtil.setWidth]
-  SizedBox get horizontalSpace2 => horizontalSpaceIndexed(1);
+  SizedBox get horizontalSpace1 => horizontalSpaceIndexed(1);
 
   ///[ScreenUtil.radius]
-  SizedBox get horizontalSpaceRadius2 => horizontalSpaceRadiusIndexed(1);
+  SizedBox get horizontalSpaceRadius1 => horizontalSpaceRadiusIndexed(1);
 
   ///[ScreenUtil.radius]
-  SizedBox get verticalSpacingRadius2 => verticalSpacingRadiusIndexed(1);
+  SizedBox get verticalSpacingRadius1 => verticalSpacingRadiusIndexed(1);
 
   ///[ScreenUtil.diameter]
-  SizedBox get horizontalSpaceDiameter2 => horizontalSpaceDiameterIndexed(1);
+  SizedBox get horizontalSpaceDiameter1 => horizontalSpaceDiameterIndexed(1);
 
   ///[ScreenUtil.diameter]
-  SizedBox get verticalSpacingDiameter2 => verticalSpacingDiameterIndexed(1);
+  SizedBox get verticalSpacingDiameter1 => verticalSpacingDiameterIndexed(1);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get horizontalSpaceDiagonal2 => horizontalSpaceDiagonalIndexed(1);
+  SizedBox get horizontalSpaceDiagonal1 => horizontalSpaceDiagonalIndexed(1);
 
   ///[ScreenUtil.diagonal]
-  SizedBox get verticalSpacingDiagonal2 => verticalSpacingDiagonalIndexed(1);
+  SizedBox get verticalSpacingDiagonal1 => verticalSpacingDiagonalIndexed(1);
 }
 
 extension EdgeInsetsExtension on EdgeInsets {
